@@ -6,6 +6,8 @@ function eventListeners(){
     document.querySelector('.crear-proyecto a').addEventListener('click',nuevoProyecto);
 
     document.querySelector('.nueva-tarea').addEventListener('click',agregarTarea);
+
+    document.querySelector('.listado-pendientes').addEventListener('click',accionesTareas);
 }
 
 function nuevoProyecto(e) {
