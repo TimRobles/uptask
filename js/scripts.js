@@ -1,13 +1,24 @@
-eventListeners();
+
 // lista de proyectos
 var listaProyectos = document.querySelector('ul#proyectos');
+var nuevaTareaListener=document.querySelector('.nueva-tarea');
+var listadoPendientesListener=document.querySelector('.listado-pendientes');
+var crearProyectoListener=document.querySelector('.crear-proyecto a');
+
+eventListeners();
 
 function eventListeners(){
-    document.querySelector('.crear-proyecto a').addEventListener('click',nuevoProyecto);
+    if (crearProyectoListener) {
+        crearProyectoListener.addEventListener('click',nuevoProyecto);
+    }
 
-    document.querySelector('.nueva-tarea').addEventListener('click',agregarTarea);
+    if (nuevaTareaListener) {
+        nuevaTareaListener.addEventListener('click',agregarTarea);   
+    }
 
-    document.querySelector('.listado-pendientes').addEventListener('click',accionesTareas);
+    if (listadoPendientesListener) {
+        listadoPendientesListener.addEventListener('click',accionesTareas);   
+    }
 }
 
 function nuevoProyecto(e) {
@@ -57,7 +68,7 @@ function guardarProyectoDB(nombreProyecto){
                 listaProyectos.appendChild(nuevoProyecto);
                 swal({
                     type: 'success',
-                    title: 'Usuario Creado',
+                    title: 'Proyecto Creado',
                     text: 'Proyecto: ' + nombreProyecto + ' se creó correctamente'
                 })
                 .then(resultado => {
@@ -148,5 +159,20 @@ function agregarTarea(e) {
         }
         //send
         xhr.send(datos);
+    }
+}
+
+function accionesTareas(e){
+    e.preventDefault();
+    if (e.target.classList.contains('fa-check-circle')) {
+        if (e.target.classList.contains('completo')) {
+            e.target.classList.remove('completo');
+        }else{
+            e.target.classList.add('completo');
+        }
+    }
+
+    if (e.target.classList.contains('fa-trash')) {
+        console.log("click en borrar");    
     }
 }
